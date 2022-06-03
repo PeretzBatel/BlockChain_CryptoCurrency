@@ -32,7 +32,7 @@ class Block {
     }
     static blockHash(block) {
         const {timestamp, lastHash ,data} = block;
-        return this.blockHash(timestamp, lastHash,data);
+        return Block.hash(timestamp, lastHash , data);
     }
 }
 
