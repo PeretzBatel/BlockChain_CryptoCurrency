@@ -25,7 +25,6 @@ expect(block.hash.substring(0, block.difficulty)).toEqual('0'.repeat(block.diffi
 it('lowers the difficulty for slowly mined blocks', () => {
     expect(Block.adjustDifficulty(block, block.timestamp+ 3600))
     .toEqual(block.difficulty-1);
-
 })
 
 });
