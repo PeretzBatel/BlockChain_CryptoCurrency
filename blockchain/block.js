@@ -1,6 +1,6 @@
 const sha256 = require('crypto-js/sha256');
 const SHA256 = require('crypto-js/sha256');   //generate unique hash based on the given data
-const {DIFFICULTY, MINE_RATE} = require('./config');
+const {DIFFICULTY, MINE_RATE} = require('../config');
 
 
 
@@ -37,7 +37,7 @@ class Block {
           difficulty = Block.adjustDifficulty(lastBlock , timestamp);
           timestamp = Date.now();
           hash = Block.hash(timestamp, lastHash, data, nonce, difficulty);
-        } while(hash.substring(0, difficulty) !== '0'.repeat(difficulty) );  //proof of work algorithm 
+        } while (hash.substring(0, difficulty) !== '0'.repeat(difficulty));  //proof of work algorithm 
 
        
 
@@ -55,7 +55,7 @@ class Block {
     }
 
     static adjustDifficulty(lastBlock , currentTime) {
-        let { difficulty } = lastBlock ; 
+        let { difficulty } = lastBlock; 
         difficulty = lastBlock.timestamp + MINE_RATE > currentTime ? difficulty + 1 : difficulty -1; 
         return difficulty; 
     }
