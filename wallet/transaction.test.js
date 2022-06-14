@@ -1,7 +1,9 @@
 const Wallet = require('./index');
+const Transaction = require('./transaction');
+
 
 describe('Transaction', () => {
-    let transactions, wallet, recipient, amount;
+    let transaction, wallet, recipient, amount;
 
     beforeEach(() => {
         wallet = new Wallet();
@@ -42,7 +44,25 @@ describe('Transaction', () => {
         it('does not create the transaction', () => {
             expect(transaction).toEqual(undefined);
         });
-
-
     });
+
+    describe('updating a transaction', () => { 
+        let nextAmount, nextRecipient;
+
+        beforeEach(() => { 
+            nextAmount = 20;
+            nextRecipient = 'n3xt-4dr355';
+            transaction = transaction.update(wallet, nextRecipient , nextAmount);
+        });
+
+        it(`subtracts the next amount from sender's output`, () => {
+            expect(transaction.outputs.find(output => output.address === wallet.publicKey).amount)
+            .toEqual(wallet.balance - amount -nextAmount); 
+        });
+
+        it('outputs an amount for the next recipient', () => {
+            expect(transaction.outputs.find(output => output.address === nextRecipient).amount)
+            .toEqual(nextAmount);
+        });
+    })
 });
