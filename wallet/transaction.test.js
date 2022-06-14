@@ -1,6 +1,4 @@
 const Wallet = require('./index');
-const Wallet = require('./index');
-const Wallet = require('./index');
 const Transaction = require('./transaction');
 
 
